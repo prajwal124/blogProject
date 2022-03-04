@@ -1,0 +1,22 @@
+<!-- EJS HEADER -->
+<%-include(`partials/header`) -%>
+
+
+<div class="container-fluid">
+  <h1>HOME</h1>
+  <p><%=homeContent%></p>
+</div>
+
+<div class="container-fluid truncate" >
+  <%for(let i=0;i<postsArray.length;i++){%>
+
+    <h2><%=postsArray[i].title%></h2>
+    <!-- TO DISPLAY ONLY 50 CHARACTERS OF THE BODY STRING -->
+    <p><%=postsArray[i].body.substring(0,100) +"..."%> <span><a href="/posts/<%=postsArray[i]._id%>">Read More</a></span><p>
+    
+
+  <%}%>
+</div>
+
+<!-- EJS FOOTER -->
+<%-include(`partials/footer`) -%>

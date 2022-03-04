@@ -1,0 +1,53 @@
+.container-fluid {
+  font-family: "Fredoka";
+}
+
+h2 {
+  font-size: 40px;
+}
+
+span {
+  font-size: 15px;
+}
+
+.container-fluid {
+  padding: 5%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  padding-left: 100px;
+  font-family: "Sacramento";
+  font-size: 50px;
+}
+
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 24px;
+  letter-spacing: 5px;
+  padding-right: 250px;
+}
+.navbar-nav li a:hover {
+  color: #1abc9c !important;
+}
+
+.footer {
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #1abc9c;
+}
+
+.footer p {
+  margin: 10px;
+  font-size: 25px;
+  color: #fff;
+}
