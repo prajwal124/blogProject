@@ -29,6 +29,12 @@ app.use(passport.session());
 // );
 mongoose.connect("mongodb://localhost:27017/blogDB");
 
+const userSchema = new mongoose.Schema({
+  name: String,
+  username: String,
+  password: String,
+});
+
 //create blog schema
 const blogSchema = new mongoose.Schema({
   title: {
@@ -39,12 +45,7 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, "Post Body Cannot be Blank!"], //validation where Post Body is must required.
   },
-});
-
-const userSchema = new mongoose.Schema({
-  name: String,
-  username: String,
-  password: String,
+  userPosted: String,
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -117,6 +118,19 @@ app.get(`/login`, (req, res) => {
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect(`/`);
+});
+
+app.get("/posts/logout", (req, res) => {
+  req.logout();
+  res.redirect(`/`);
+});
+
+app.get("/posts/about", (req, res) => {
+  res.redirect(`/about`);
+});
+
+app.get("/posts/contact", (req, res) => {
+  res.redirect(`/contact`);
 });
 
 app.post("/login", passport.authenticate("local"), function (req, res) {
@@ -222,7 +236,7 @@ app.get("/", (req, res) => {
   );
   if (req.isAuthenticated()) {
     let displayItems = [];
-    blogItem.find({}, (err, data) => {
+    blogItem.find({ userPosted: req.user.username }, (err, data) => {
       res.render(`home`, {
         homeContent: homeStartingContent,
         postsArray: data,
@@ -282,6 +296,7 @@ app.post("/compose", (req, res) => {
     const newPost = {
       postTitle: lodash.upperFirst(lodash.lowerCase(req.body.postTitle)),
       postBody: req.body.postBody,
+      postuser: req.user.username,
     };
     //globalPostsArray.push(newPost);
 
@@ -289,6 +304,7 @@ app.post("/compose", (req, res) => {
       {
         title: newPost.postTitle,
         body: newPost.postBody,
+        userPosted: newPost.postuser,
       },
       (err) => {
         if (err) {
