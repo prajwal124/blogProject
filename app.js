@@ -24,10 +24,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mongoose.connect(
-//   "mongodb+srv://prajwal124:testpassword@cluster0.lxzzk.mongodb.net/blogDB"
-// );
-mongoose.connect("mongodb://localhost:27017/blogDB");
+mongoose.connect(
+  "mongodb+srv://prajwal124:testpassword@cluster0.lxzzk.mongodb.net/blogDB"
+);
+//mongoose.connect("mongodb://localhost:27017/blogDB");
 
 const userSchema = new mongoose.Schema({
   name: String,
